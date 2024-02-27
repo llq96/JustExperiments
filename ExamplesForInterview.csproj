@@ -6,10 +6,21 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>12</LangVersion>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="BenchmarkDotNet" Version="0.13.12" />
     </ItemGroup>
+
+
 
 </Project>
