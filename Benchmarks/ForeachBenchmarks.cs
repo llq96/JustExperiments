@@ -6,7 +6,7 @@ namespace ExamplesForInterview;
 //Для статического метода генерируется отдельный статический класс с экшеном и каждый раз выполняется проверка на null
 //(Видимо)Из-за этого методы становятся в 3 раза медленнее
 
-// Последние результаты:
+// Последние результаты (CountElements = 100;):
 // | Method                   | Mean      | Error    | StdDev   | Ratio | RatioSD | Gen0   | Allocated | Alloc Ratio |
 // |------------------------- |----------:|---------:|---------:|------:|--------:|-------:|----------:|------------:|
 // | ArrayFor                 |  27.02 ns | 0.340 ns | 0.318 ns |  1.00 |    0.00 |      - |         - |          NA |
@@ -22,10 +22,22 @@ namespace ExamplesForInterview;
 // ListForEach медленнее из-за try блока и постоянных MoveNext() и Current
 // Варианты с передачей экшена медленнее видимо из-за самого экшена
 
+// Последние результаты (CountElements = 100000;):
+// | Method                   | Mean      | Error    | StdDev   | Ratio | RatioSD | Gen0     | Gen1     | Gen2     | Allocated | Alloc Ratio |
+// |------------------------- |----------:|---------:|---------:|------:|--------:|---------:|---------:|---------:|----------:|------------:|
+// | ArrayFor                 |  19.10 us | 0.018 us | 0.020 us |  1.00 |    0.00 |        - |        - |        - |         - |          NA |
+// | ArrayForeach             |  19.08 us | 0.017 us | 0.014 us |  1.00 |    0.00 |        - |        - |        - |         - |          NA |
+// | ListFor                  |  28.88 us | 0.163 us | 0.153 us |  1.51 |    0.01 |        - |        - |        - |         - |          NA |
+// | ListForeach              |  29.24 us | 0.099 us | 0.092 us |  1.53 |    0.00 |        - |        - |        - |         - |          NA |
+// | ListForeachMethod        | 175.96 us | 0.412 us | 0.385 us |  9.21 |    0.02 |        - |        - |        - |         - |          NA |
+// | ArrayToListForeachMethod | 278.70 us | 1.259 us | 1.116 us | 14.59 |    0.06 | 124.5117 | 124.5117 | 124.5117 |  400098 B |          NA |
+// | ListMyForeachMethod      | 175.85 us | 0.511 us | 0.427 us |  9.21 |    0.03 |        - |        - |        - |         - |          NA |
+// | ListMyForeach2Method     | 176.04 us | 0.471 us | 0.441 us |  9.22 |    0.02 |        - |        - |        - |         - |          NA |
+
 [MemoryDiagnoser]
 public class ForeachBenchmarks
 {
-    private const int CountElements = 100;
+    private const int CountElements = 100000;
     private static readonly int[] TestArray = Enumerable.Range(0, CountElements).Select(i => i).ToArray();
     private static readonly List<int> TestList = Enumerable.Range(0, CountElements).Select(i => i).ToList();
 
