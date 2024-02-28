@@ -31,17 +31,17 @@ public struct TestStruct
         Value = value;
     }
 
-    public TestStruct(float value)
-    {
-        Value = (int)value;
-    }
-
     public override string ToString()
     {
         return Value.ToString();
     }
 
-    public static explicit operator int(TestStruct testStruct)
+    // public static explicit operator int(TestStruct testStruct)
+    // {
+    //     return testStruct.Value;
+    // }
+
+    public static implicit operator int(TestStruct testStruct)
     {
         return testStruct.Value;
     }

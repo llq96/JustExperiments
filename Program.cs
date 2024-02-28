@@ -19,7 +19,7 @@ internal class Program
         // new ClosureILCodeTests().Run();
 
         // BenchmarkRunner.Run<MyBenchmarks>();
-        BenchmarkRunner.Run<ForeachBenchmarks>();
+        // BenchmarkRunner.Run<ForeachBenchmarks>();
 
         // new ForeachBenchmarks().ArrayUnsafeFor();
     }
