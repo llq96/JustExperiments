@@ -41,47 +41,22 @@ public class ForeachBenchmarks
         }
     }
 
-    [Benchmark]
-    public void ArrayForImproved()
-    {
-        var array = TestArray;
-        for (var i = 0; i < array.Length; i++)
-        {
-            SomeAction(array[i]);
-        }
-    }
-
-    [Benchmark]
-    public void ArrayForeach()
-    {
-        foreach (var number in TestArray)
-        {
-            SomeAction(number);
-        }
-    }
-
     // [Benchmark]
-    // public void Act()
+    // public void Act_Try4()
     // {
-    //     TestList.Act(SomeAction);
+    //     TestList.Act_Try4(SomeAction);
     // }
 
     [Benchmark]
-    public void Act_Try4()
+    public void Act()
     {
-        TestList.Act_Try4(SomeAction);
+        TestList.Act(SomeAction);
     }
 
     [Benchmark]
-    public void Act_Try8()
+    public void Act_Try4_Safe()
     {
-        TestList.Act_Try8(SomeAction);
-    }
-
-    [Benchmark]
-    public void Act_Try8_2()
-    {
-        TestList.Act_Try8_2(SomeAction);
+        TestList.Act_Try4_Safe(SomeAction);
     }
 
     private void SomeAction(int num)
@@ -94,54 +69,31 @@ public static class TestExtensions
     public static void Act<T>(this List<T> list, Action<T> action)
     {
         var array = list.GetInternalArray();
-        var count = array.Length;
-        for (int i = 0; i < count - 1; i++)
+        var count = list.Count;
+        for (int i = 0; i < count; i++)
         {
             action.Invoke(array[i]);
         }
     }
 
-    public static void Act_Try4<T>(this List<T> list, Action<T> action)
+    public static void Act_Try4_Safe<T>(this List<T> list, Action<T> action)
     {
         var array = list.GetInternalArray();
-        var count = array.Length;
-        for (int i = 0; i <= count - 4; i += 4)
+        var rest = list.Count % 4;
+        var countList = list.Count - rest;
+        var countArray = array.Length;
+        for (int i = 0; i <= countArray - 4; i += 4)
         {
-            action.Invoke(array[i]);
-            action.Invoke(array[i + 1]);
-            action.Invoke(array[i + 2]);
-            action.Invoke(array[i + 3]);
-        }
-    }
-
-    public static void Act_Try8<T>(this List<T> list, Action<T> action)
-    {
-        var array = list.GetInternalArray();
-        var count = array.Length;
-        for (int i = 0; i <= count - 8; i += 8)
-        {
+            if (i + 3 >= countList) break;
             action.Invoke(array[i]);
             action.Invoke(array[i + 1]);
             action.Invoke(array[i + 2]);
             action.Invoke(array[i + 3]);
-            action.Invoke(array[i + 4]);
-            action.Invoke(array[i + 5]);
-            action.Invoke(array[i + 6]);
-            action.Invoke(array[i + 7]);
         }
-    }
 
-    public static void Act_Try8_2<T>(this List<T> list, Action<T> action)
-    {
-        var array = list.GetInternalArray();
-        var count = array.Length;
-        var N = 8;
-        for (int i = 0; i <= count - N; i += N)
+        for (int i = 0; i < rest; i++)
         {
-            for (int j = 0; j < N; j++)
-            {
-                action.Invoke(array[i + j]);
-            }
+            action.Invoke(array[countList + i]);
         }
     }
 }

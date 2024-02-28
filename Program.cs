@@ -21,6 +21,15 @@ internal class Program
         // BenchmarkRunner.Run<MyBenchmarks>();
         BenchmarkRunner.Run<ForeachBenchmarks>();
 
-        // new ForeachBenchmarks().ArrayUnsafeFor();
+        // new ForeachBenchmarks().Act_Try4();
+        // new ForeachBenchmarks().Act_Try4_Correct();
+
+        // List<int> test = Enumerable.Range(0, 5).Select(i => i).ToList();
+        //
+        //
+        // Console.WriteLine();
+        // test.Act_Try4_Correct(Console.Write);
+        // Console.WriteLine();
+        // test.Act_Try4_Safe(Console.Write);
     }
 }
