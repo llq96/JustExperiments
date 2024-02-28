@@ -28,11 +28,4 @@ public static class ListExtensions
     {
         return ArrayAccessor<T>.Getter(list);
     }
-
-    public static T[] GetInternalArray2<T>(this List<T> list)
-    {
-        var fieldInfo = typeof(List<T>).GetField("_items", BindingFlags.NonPublic | BindingFlags.Instance);
-        var fieldValue = fieldInfo.GetValue(list) as T[];
-        return fieldValue;
-    }
 }
