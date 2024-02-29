@@ -1,4 +1,5 @@
-﻿using BenchmarkDotNet.Attributes;
+﻿using System.Runtime.InteropServices;
+using BenchmarkDotNet.Attributes;
 using ExamplesForInterview.Extensions;
 
 namespace ExamplesForInterview;
@@ -33,13 +34,6 @@ namespace ExamplesForInterview;
 // | ListAct_32             | 10.913 ns | 0.2126 ns | 0.1885 ns |  5.51 |    0.13 | 0.0076 |      64 B |          NA |
 // | ListAct_64             | 14.370 ns | 0.2740 ns | 0.2563 ns |  7.25 |    0.14 | 0.0076 |      64 B |          NA |
 
-// | Method                          | Mean       | Error     | StdDev    | Ratio | Gen0   | Allocated | Alloc Ratio |
-// |-------------------------------- |-----------:|----------:|----------:|------:|-------:|----------:|------------:|
-// | ListFor_ZeroTo32                | 6,042.2 ns |  79.94 ns |  74.78 ns |  0.71 | 0.2594 |   2.13 KB |        0.21 |
-// | ListFor_WithAction_ZeroTo32     | 8,609.9 ns |  41.37 ns |  34.55 ns |  1.01 | 1.2360 |  10.13 KB |        1.00 |
-// | ListForEach_WithAction_ZeroTo32 | 8,518.5 ns | 121.01 ns | 113.20 ns |  1.00 | 1.2360 |  10.13 KB |        1.00 |
-// | ListAct_ZeroTo32                |   292.7 ns |   5.55 ns |  10.95 ns |  0.04 | 0.2885 |   2.36 KB |        0.23 |
-
 [MemoryDiagnoser]
 public class ForeachBenchmarks
 {
@@ -47,7 +41,7 @@ public class ForeachBenchmarks
     public const int CountIncrement = 128;
 
     [Benchmark]
-    public void ListFor_ZeroTo32()
+    public void ListFor()
     {
         List<int> list = new int[StartCount].ToList();
         for (int k = 0; k < CountIncrement; k++)
@@ -58,7 +52,7 @@ public class ForeachBenchmarks
     }
 
     [Benchmark]
-    public void ListFor_WithAction_ZeroTo32()
+    public void ListFor_WithAction()
     {
         List<int> list = new int[StartCount].ToList();
         for (int k = 0; k < CountIncrement; k++)
@@ -70,7 +64,7 @@ public class ForeachBenchmarks
     }
 
     [Benchmark(Baseline = true)]
-    public void ListForEach_WithAction_ZeroTo32()
+    public void ListForEach_WithAction()
     {
         List<int> list = new int[StartCount].ToList();
         for (int k = 0; k < CountIncrement; k++)
@@ -82,13 +76,24 @@ public class ForeachBenchmarks
     }
 
     [Benchmark]
-    public void ListAct_ZeroTo32()
+    public void ListAct()
     {
-        List<int> list = new List<int>();
-        for (int k = 0; k < 32; k++)
+        List<int> list = new int[StartCount].ToList();
+        for (int k = 0; k < CountIncrement; k++)
         {
             list.Add(k);
             list.Act(SomeAction);
+        }
+    }
+
+    [Benchmark]
+    public void ListActWithSpan()
+    {
+        List<int> list = new int[StartCount].ToList();
+        for (int k = 0; k < CountIncrement; k++)
+        {
+            list.Add(k);
+            list.ActWithSpan(SomeAction);
         }
     }
 
@@ -139,6 +144,57 @@ public static partial class ActExtensions
         for (int i = 0; i < rest; i++)
         {
             action.Invoke(array[listMultipleOf4Length + i]);
+        }
+    }
+
+    public static void ActWithSpan<T>(this List<T> list, Action<T> action)
+    {
+        var listLength = list.Count;
+        if (listLength <= 32)
+        {
+            if (listLength == 32)
+            {
+                list.List_32Test_AsSpan(action);
+                return;
+            }
+
+            if (listLength == 16)
+            {
+                list.List_16Test_AsSpan(action);
+                return;
+            }
+
+            if (listLength == 8)
+            {
+                list.List_8Test_AsSpan(action);
+                return;
+            }
+        }
+
+        var span = CollectionsMarshal.AsSpan(list);
+        var rest = list.Count % 4;
+        var listMultipleOf4Length = listLength - rest;
+        var spanLength = span.Length;
+
+        unsafe
+        {
+            ref T reference = ref span.GetPinnableReference();
+            fixed (T* p = &reference)
+            {
+                for (int i = 0; i <= spanLength - 4; i += 4)
+                {
+                    if (i + 3 >= listMultipleOf4Length) break;
+                    action.Invoke(*(p + i));
+                    action.Invoke(*(p + i + 1));
+                    action.Invoke(*(p + i + 2));
+                    action.Invoke(*(p + i + 3));
+                }
+
+                for (int i = 0; i < rest; i++)
+                {
+                    action.Invoke(*(p + listMultipleOf4Length + i));
+                }
+            }
         }
     }
 }
