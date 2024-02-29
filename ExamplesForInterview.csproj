@@ -9,13 +9,9 @@
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
 
-    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
-    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' " />
 
-    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-      <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
-    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' " />
 
     <ItemGroup>
       <PackageReference Include="BenchmarkDotNet" Version="0.13.12" />

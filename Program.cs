@@ -22,14 +22,15 @@ internal class Program
         BenchmarkRunner.Run<ForeachBenchmarks>();
 
         // new ForeachBenchmarks().Act_Try4();
-        // new ForeachBenchmarks().Act_Try4_Correct();
+        // new ForeachBenchmarks().List_32Test_AsSpan();
 
-        // List<int> test = Enumerable.Range(0, 5).Select(i => i).ToList();
-        //
-        //
-        // Console.WriteLine();
-        // test.Act_Try4_Correct(Console.Write);
-        // Console.WriteLine();
-        // test.Act_Try4_Safe(Console.Write);
+        // for (int i = 0; i < 10; i++)
+        // {
+        //     List<int> test = Enumerable.Range(0, i).Select(x => x).ToList();
+        //     Console.WriteLine();
+        //     test.Act(Console.Write);
+        //     Console.WriteLine();
+        //     test.SimpleAct(Console.Write);
+        // }
     }
 }
