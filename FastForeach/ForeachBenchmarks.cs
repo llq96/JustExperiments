@@ -1,6 +1,5 @@
 ﻿using BenchmarkDotNet.Attributes;
 using ExamplesForInterview.Extensions;
-using Microsoft.Diagnostics.Tracing.Stacks;
 
 namespace ExamplesForInterview;
 
@@ -34,83 +33,64 @@ namespace ExamplesForInterview;
 // | ListAct_32             | 10.913 ns | 0.2126 ns | 0.1885 ns |  5.51 |    0.13 | 0.0076 |      64 B |          NA |
 // | ListAct_64             | 14.370 ns | 0.2740 ns | 0.2563 ns |  7.25 |    0.14 | 0.0076 |      64 B |          NA |
 
+// | Method                          | Mean       | Error     | StdDev    | Ratio | Gen0   | Allocated | Alloc Ratio |
+// |-------------------------------- |-----------:|----------:|----------:|------:|-------:|----------:|------------:|
+// | ListFor_ZeroTo32                | 6,042.2 ns |  79.94 ns |  74.78 ns |  0.71 | 0.2594 |   2.13 KB |        0.21 |
+// | ListFor_WithAction_ZeroTo32     | 8,609.9 ns |  41.37 ns |  34.55 ns |  1.01 | 1.2360 |  10.13 KB |        1.00 |
+// | ListForEach_WithAction_ZeroTo32 | 8,518.5 ns | 121.01 ns | 113.20 ns |  1.00 | 1.2360 |  10.13 KB |        1.00 |
+// | ListAct_ZeroTo32                |   292.7 ns |   5.55 ns |  10.95 ns |  0.04 | 0.2885 |   2.36 KB |        0.23 |
+
 [MemoryDiagnoser]
 public class ForeachBenchmarks
 {
-    // private const int CountElements = 8;
-    private static readonly int[] TestArray_8 = Enumerable.Range(0, 8).Select(i => i).ToArray();
-    private static readonly List<int> TestList_8 = Enumerable.Range(0, 8).Select(i => i).ToList();
-    private static readonly int[] TestArray_16 = Enumerable.Range(0, 16).Select(i => i).ToArray();
-    private static readonly List<int> TestList_16 = Enumerable.Range(0, 16).Select(i => i).ToList();
-    private static readonly int[] TestArray_32 = Enumerable.Range(0, 32).Select(i => i).ToArray();
-    private static readonly List<int> TestList_32 = Enumerable.Range(0, 32).Select(i => i).ToList();
-    private static readonly int[] TestArray_64 = Enumerable.Range(0, 64).Select(i => i).ToArray();
-    private static readonly List<int> TestList_64 = Enumerable.Range(0, 64).Select(i => i).ToList();
+    public const int StartCount = 64;
+    public const int CountIncrement = 128;
 
-    #region ArrayFor
+    [Benchmark]
+    public void ListFor_ZeroTo32()
+    {
+        List<int> list = new int[StartCount].ToList();
+        for (int k = 0; k < CountIncrement; k++)
+        {
+            list.Add(k);
+            for (var i = 0; i < list.Count; i++) SomeAction(list[i]);
+        }
+    }
+
+    [Benchmark]
+    public void ListFor_WithAction_ZeroTo32()
+    {
+        List<int> list = new int[StartCount].ToList();
+        for (int k = 0; k < CountIncrement; k++)
+        {
+            list.Add(k);
+            Action<int> action = SomeAction;
+            for (var i = 0; i < list.Count; i++) action.Invoke(list[i]);
+        }
+    }
 
     [Benchmark(Baseline = true)]
-    public void ArrayFor_8()
+    public void ListForEach_WithAction_ZeroTo32()
     {
-        for (var i = 0; i < TestArray_8.Length; i++) SomeAction(TestArray_8[i]);
+        List<int> list = new int[StartCount].ToList();
+        for (int k = 0; k < CountIncrement; k++)
+        {
+            list.Add(k);
+            Action<int> action = SomeAction;
+            list.ForEach(action);
+        }
     }
 
     [Benchmark]
-    public void ArrayFor_16()
+    public void ListAct_ZeroTo32()
     {
-        for (var i = 0; i < TestArray_16.Length; i++) SomeAction(TestArray_16[i]);
+        List<int> list = new List<int>();
+        for (int k = 0; k < 32; k++)
+        {
+            list.Add(k);
+            list.Act(SomeAction);
+        }
     }
-
-    [Benchmark]
-    public void ArrayFor_32()
-    {
-        for (var i = 0; i < TestArray_32.Length; i++) SomeAction(TestArray_32[i]);
-    }
-
-    [Benchmark]
-    public void ArrayFor_64()
-    {
-        for (var i = 0; i < TestArray_64.Length; i++) SomeAction(TestArray_64[i]);
-    }
-
-    #endregion
-
-    #region ArrayFor_WithAction
-
-    [Benchmark]
-    public void ArrayFor_WithAction_8()
-    {
-        Action<int> action = SomeAction;
-        for (var i = 0; i < TestArray_8.Length; i++) action.Invoke(TestArray_8[i]);
-    }
-
-    [Benchmark]
-    public void ArrayFor_WithAction_16()
-    {
-        Action<int> action = SomeAction;
-        for (var i = 0; i < TestArray_16.Length; i++) action.Invoke(TestArray_16[i]);
-    }
-
-    [Benchmark]
-    public void ArrayFor_WithAction_32()
-    {
-        Action<int> action = SomeAction;
-        for (var i = 0; i < TestArray_32.Length; i++) action.Invoke(TestArray_32[i]);
-    }
-
-    [Benchmark]
-    public void ArrayFor_WithAction_64()
-    {
-        Action<int> action = SomeAction;
-        for (var i = 0; i < TestArray_64.Length; i++) action.Invoke(TestArray_64[i]);
-    }
-
-    #endregion
-
-    [Benchmark] public void ListAct_8() => TestList_8.Act(SomeAction);
-    [Benchmark] public void ListAct_16() => TestList_16.Act(SomeAction);
-    [Benchmark] public void ListAct_32() => TestList_32.Act(SomeAction);
-    [Benchmark] public void ListAct_64() => TestList_64.Act(SomeAction);
 
     private void SomeAction(int num)
     {
@@ -159,15 +139,6 @@ public static partial class ActExtensions
         for (int i = 0; i < rest; i++)
         {
             action.Invoke(array[listMultipleOf4Length + i]);
-        }
-    }
-
-    public static void SimpleAct<T>(this List<T> list, Action<T> action)
-    {
-        List<T>.Enumerator enumerator = list.GetEnumerator();
-        while (enumerator.MoveNext())
-        {
-            action(enumerator.Current);
         }
     }
 }
