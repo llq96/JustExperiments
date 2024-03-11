@@ -37,8 +37,8 @@ namespace ExamplesForInterview;
 [MemoryDiagnoser]
 public class ForeachBenchmarks
 {
-    public const int StartCount = 64;
-    public const int CountIncrement = 128;
+    public const int StartCount = 50;
+    public const int CountIncrement = 10000;
 
     [Benchmark]
     public void ListFor()
