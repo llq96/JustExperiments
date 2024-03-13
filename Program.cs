@@ -20,7 +20,7 @@ internal class Program
         // new ClosureILCodeTests().Run();
 
         // BenchmarkRunner.Run<MyBenchmarks>();
-        BenchmarkRunner.Run<ForeachBenchmarks>();
+        // BenchmarkRunner.Run<ForeachBenchmarks>();
 
         // new ForeachBenchmarks().Act_Try4();
         // new ForeachBenchmarks().List_32Test_AsSpan();
@@ -35,5 +35,6 @@ internal class Program
         // }
 
         // Series.Run();
+        new ForEachILCodeTests().Run();
     }
 }
