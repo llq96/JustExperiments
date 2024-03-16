@@ -35,6 +35,9 @@ internal class Program
         // }
 
         // Series.Run();
-        new ForEachILCodeTests().Run();
+        // new ForEachILCodeTests().Run();
+        // new SplitBenchmarks().Test2();
+        // new SplitBenchmarks().Test2();
+        BenchmarkRunner.Run<SplitBenchmarks>();
     }
 }
