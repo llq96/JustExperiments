@@ -38,6 +38,6 @@ internal class Program
         // new ForEachILCodeTests().Run();
         // new SplitBenchmarks().Test2();
         // new SplitBenchmarks().Test2();
-        BenchmarkRunner.Run<SplitBenchmarks>();
+        // BenchmarkRunner.Run<SplitBenchmarks>();
     }
 }
