@@ -39,5 +39,7 @@ internal class Program
         // new SplitBenchmarks().Test2();
         // new SplitBenchmarks().Test2();
         // BenchmarkRunner.Run<SplitBenchmarks>();
+
+        // new InterfacesILCodeTests().Run();
     }
 }
