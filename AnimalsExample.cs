@@ -44,4 +44,13 @@ public class AnimalsExample
         Func<Animal> getAnimalFunc;
         getAnimalFunc = GetNewCat;
     }
+
+
+    public void Example5()
+    {
+        Cat[] cats = { GetNewCat() };
+        // Warning: Co-variant array conversion from Cat[] to Animal[] can cause run-time exception on write operation
+        Animal[] animals = cats;
+        animals[0] = new Animal(); //ArrayTypeMismatchException
+    }
 }

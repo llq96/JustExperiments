@@ -41,5 +41,6 @@ internal class Program
         // BenchmarkRunner.Run<SplitBenchmarks>();
 
         // new InterfacesILCodeTests().Run();
+        // new AnimalsExample().Example5();
     }
 }
