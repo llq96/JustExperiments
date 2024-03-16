@@ -5,7 +5,7 @@ public class ClosureILCodeTests
     private string _someStringField;
 
     public event Action asd;
-    
+
     // public void Run()
     // {
     //     Action a = () => Console.WriteLine(_someStringField);
@@ -15,6 +15,7 @@ public class ClosureILCodeTests
     {
         int someInt = 123;
         Action a = () => Console.WriteLine(_someStringField + someInt);
+        asd = a;
         asd.Invoke();
     }
 
