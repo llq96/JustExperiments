@@ -15,7 +15,9 @@ public class ClosureILCodeTests
     {
         int someInt = 123;
         Action a = () => Console.WriteLine(_someStringField + someInt);
+        Action b = delegate { Console.WriteLine(_someStringField + someInt); };
         asd = a;
+        asd = b;
         asd.Invoke();
     }
 
