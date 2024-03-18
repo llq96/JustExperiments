@@ -1,4 +1,6 @@
-﻿namespace ExamplesForInterview;
+﻿using BenchmarkDotNet.Running;
+
+namespace ExamplesForInterview;
 
 internal class Program
 {
@@ -33,9 +35,9 @@ internal class Program
 
         // Series.Run();
         // new ForEachILCodeTests().Run();
-        // new SplitBenchmarks().Test2();
-        // new SplitBenchmarks().Test2();
-        // BenchmarkRunner.Run<SplitBenchmarks>();
+
+        BenchmarkRunner.Run<SplitBenchmarks>();
+        // new SplitBenchmarks().Check();
 
         // new InterfacesILCodeTests().Run();
         // new AnimalsExample().Example5();
