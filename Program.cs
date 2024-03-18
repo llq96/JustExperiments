@@ -1,7 +1,4 @@
-﻿using BenchmarkDotNet.Running;
-using ExamplesForInterview.TgSolution;
-
-namespace ExamplesForInterview;
+﻿namespace ExamplesForInterview;
 
 internal class Program
 {
