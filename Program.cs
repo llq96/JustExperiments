@@ -36,10 +36,11 @@ internal class Program
         // Series.Run();
         // new ForEachILCodeTests().Run();
 
-        BenchmarkRunner.Run<SplitBenchmarks>();
+        // BenchmarkRunner.Run<SplitBenchmarks>();
         // new SplitBenchmarks().Check();
 
         // new InterfacesILCodeTests().Run();
         // new AnimalsExample().Example5();
+        new Mutation().Run();
     }
 }
