@@ -38,4 +38,16 @@ public class Mutation
             }
         }
     }
+
+    private void MutateByGCHandle(string str)
+    {
+        GCHandle handle = GCHandle.Alloc(str, GCHandleType.Pinned);
+
+        IntPtr pointer = handle.AddrOfPinnedObject();
+
+        Marshal.WriteByte(pointer, 0, (byte)'4');
+        Marshal.WriteByte(pointer, 4, (byte)'4');
+
+        handle.Free();
+    }
 }
