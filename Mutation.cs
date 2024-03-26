@@ -28,9 +28,9 @@ public class Mutation
 
     private void UnsafeMutate(string str)
     {
+        ref readonly char reference = ref str.AsSpan().GetPinnableReference();
         unsafe
         {
-            ref readonly char reference = ref str.AsSpan().GetPinnableReference();
             fixed (char* p = &reference)
             {
                 *p = '4';
