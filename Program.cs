@@ -41,6 +41,6 @@ internal class Program
 
         // new InterfacesILCodeTests().Run();
         // new AnimalsExample().Example5();
-        new TasksLockTests().Run();
+        new AsyncTests2().Run();
     }
 }
