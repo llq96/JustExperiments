@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using BenchmarkDotNet.Attributes;
 using ExamplesForInterview.Extensions;
 
@@ -104,6 +105,7 @@ public class ForeachBenchmarks
 
 public static partial class ActExtensions
 {
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void Act<T>(this List<T> list, Action<T> action)
     {
         var listLength = list.Count;
@@ -147,6 +149,8 @@ public static partial class ActExtensions
         }
     }
 
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void ActWithSpan<T>(this List<T> list, Action<T> action)
     {
         var listLength = list.Count;

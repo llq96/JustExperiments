@@ -1,4 +1,6 @@
-﻿namespace ExamplesForInterview.Extensions;
+﻿using System.Runtime.CompilerServices;
+
+namespace ExamplesForInterview.Extensions;
 
 using System.Reflection;
 using System.Reflection.Emit;
@@ -24,6 +26,7 @@ public static class ListExtensions
         }
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T[] GetInternalArray<T>(this List<T> list)
     {
         return ArrayAccessor<T>.Getter(list);
