@@ -41,6 +41,7 @@ internal class Program
 
         // new InterfacesILCodeTests().Run();
         // new AnimalsExample().Example5();
-        new AsyncTests2().Run();
+        // new AsyncTests2().Run();
+        new ReactivePropertyTests().Run();
     }
 }
