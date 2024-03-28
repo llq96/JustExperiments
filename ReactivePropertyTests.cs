@@ -1,10 +1,10 @@
-﻿using ReactiveUI;
+﻿using ReactiveInt = ReactiveUI.ReactiveProperty<int>;
 
 namespace ExamplesForInterview;
 
 public class ReactivePropertyTests
 {
-    private ReactiveProperty<int> _reactiveInt = new();
+    private ReactiveInt _reactiveInt = new();
 
     public void Run()
     {

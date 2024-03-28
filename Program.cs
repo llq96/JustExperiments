@@ -19,7 +19,7 @@ internal class Program
         // new ClosureILCodeTests().Run();
 
         // BenchmarkRunner.Run<MyBenchmarks>();
-        BenchmarkRunner.Run<ForeachBenchmarks>();
+        // BenchmarkRunner.Run<ForeachBenchmarks>();
 
         // new ForeachBenchmarks().Act_Try4();
         // new ForeachBenchmarks().List_32Test_AsSpan();
@@ -43,5 +43,7 @@ internal class Program
         // new AnimalsExample().Example5();
         // new AsyncTests2().Run();
         // new ReactivePropertyTests().Run();
+        // new RefOutIn_InMethods().Run();
+        BenchmarkRunner.Run<InParameterBenchmark>();
     }
 }
