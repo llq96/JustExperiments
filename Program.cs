@@ -44,6 +44,7 @@ internal class Program
         // new AsyncTests2().Run();
         // new ReactivePropertyTests().Run();
         // new RefOutIn_InMethods().Run();
-        BenchmarkRunner.Run<InParameterBenchmark>();
+        new ConstructorViaReflection().Run();
+        // BenchmarkRunner.Run<InParameterBenchmark>();
     }
 }
