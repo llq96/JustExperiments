@@ -1,25 +1,46 @@
-﻿namespace ExamplesForInterview;
+﻿// #define EnableIN
+// #define EnableOUT
+
+namespace ExamplesForInterview;
 
 public class OutIn_InInterfaces
 {
     public void Run()
     {
-        Interface1<object>[] list1 = { new Class1<object>() };
-        Interface1<string>[] list2 = { new Class1<string>() };
+        ISomeInterface<object> obj = new SomeClass<object>();
+        ISomeInterface<string> str = new SomeClass<string>();
 
-        list2 = list1; //Can with in in interface
+        ISomeInterface<object>[] listObj = { new SomeClass<object>() };
+        ISomeInterface<string>[] listStr = { new SomeClass<string>() };
+
+#if EnableIN
+        str = obj; // Can only with "in" in interface, because
+        //T GetSomeData(); can return object without "in"
+#endif
+#if EnableOUT
+        obj = str; // Can only with "out" in interface, because
+        // SetSomeData(T) can expect string instead object without "out"
+#endif
+
+#if EnableIN
+        listStr = listObj; // Can only with "in" in interface
+        // var someString = listStr[0].GetSomeData(); // error because return object, but expect string
+#endif
+#if EnableOUT
+        listObj = listStr; // Can only with "out" in interface
+        // listObj[0] = new SomeClass<object>(); // System.ArrayTypeMismatchException
+#endif
     }
 }
 
-public interface Interface1<in T>
-{
-    void Log();
-}
+public interface ISomeInterface<
+#if EnableIN
+    in
+#endif
+#if EnableOUT
+    out
+#endif
+    TType
+>;
 
-public class Class1<T> : Interface1<T>
-{
-    public void Log()
-    {
-        Console.WriteLine(GetType());
-    }
-}
+public class SomeClass<T> : ISomeInterface<T>;

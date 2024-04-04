@@ -8,5 +8,6 @@ internal class Program
     {
         // BenchmarkRunner.Run<InParameterBenchmark>();
         // new StringsEquals().Run();
+        new OutIn_InInterfaces().Run();
     }
 }
