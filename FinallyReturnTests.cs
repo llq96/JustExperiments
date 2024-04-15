@@ -1,5 +1,8 @@
 ﻿namespace ExamplesForInterview;
 
+/// <summary>
+/// Return можно использовать в блоках try и catch, но нельзя в блоке finally
+/// </summary>
 public class FinallyReturnTests
 {
     public void Run()

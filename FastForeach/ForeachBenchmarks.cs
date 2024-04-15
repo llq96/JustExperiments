@@ -52,6 +52,18 @@ public class ForeachBenchmarks
         }
     }
 
+
+    [Benchmark]
+    public void ParallelForAll()
+    {
+        List<int> list = new int[StartCount].ToList();
+        for (int k = 0; k < CountIncrement; k++)
+        {
+            list.Add(k);
+            list.AsParallel().ForAll(SomeAction);
+        }
+    }
+
     [Benchmark]
     public void ListFor_WithAction()
     {

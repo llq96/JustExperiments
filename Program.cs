@@ -1,12 +1,10 @@
-﻿using BenchmarkDotNet.Running;
-
-namespace ExamplesForInterview;
+﻿namespace ExamplesForInterview;
 
 internal class Program
 {
     private static void Main()
     {
-        // new InternedStrings().Run();
-        BenchmarkRunner.Run<PseudoAsyncBenchmark>();
+        // BenchmarkRunner.Run<ForeachBenchmarks>();
+        // new SmallExamples().UnsafeLog();
     }
 }
