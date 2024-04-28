@@ -6,6 +6,7 @@ namespace ExamplesForInterview;
 public class Mutation
 {
     private const string constStr = "000";
+    // static ref string GetX() => ref constStr; //Can not get ref Constant value
 
     public void Run()
     {
