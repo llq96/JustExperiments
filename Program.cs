@@ -6,5 +6,6 @@ internal class Program
     {
         // BenchmarkRunner.Run<ForeachBenchmarks>();
         // new SmallExamples().UnsafeLog();
+        new AfterTryDontInvoked().Run();
     }
 }
