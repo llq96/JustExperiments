@@ -15,6 +15,12 @@ public class ConstructorViaReflection
         Console.WriteLine(obj);
     }
 
+    public void Run2()
+    {
+        // TODO
+        // Activator.CreateInstance();
+    }
+
     public class BestSingleton
     {
         private readonly int _value;
