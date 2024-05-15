@@ -1,10 +1,12 @@
-﻿namespace ExamplesForInterview;
+﻿using ExamplesForInterview.Examples.Serialization;
+
+namespace ExamplesForInterview;
 
 internal class Program
 {
     private static void Main()
     {
         // BenchmarkRunner.Run<ForeachBenchmarks>();
-        new ClassicFloatAndDoubleMath().Run();
+        new HashSetToJsonExamples().Run();
     }
 }
