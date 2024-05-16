@@ -1,4 +1,4 @@
-﻿using ExamplesForInterview.Examples.Serialization;
+﻿using ExamplesForInterview.TgSolution;
 
 namespace ExamplesForInterview;
 
@@ -7,6 +7,6 @@ internal class Program
     private static void Main()
     {
         // BenchmarkRunner.Run<ForeachBenchmarks>();
-        new HashSetToJsonExamples().Run();
+        new TG_TaskAboutBytes().Run2();
     }
 }
