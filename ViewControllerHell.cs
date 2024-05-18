@@ -8,18 +8,26 @@ public class ViewControllerHell
         var controller = new IdleController();
         var state = new State<IdleView, IdleController>(view, controller);
 
+        var a = view.View;
+        var b = controller.Controller;
         Console.WriteLine(state.View.Controller);
         Console.WriteLine(state.Controller.View);
     }
 
-    public class State<TView, TController>
+    public abstract class State(BaseStatePart view, BaseStatePart controller)
+    {
+        public BaseStatePart View = view;
+        public BaseStatePart Controller = controller;
+    }
+
+    public class State<TView, TController> : State
         where TView : BasePartView<TView, TController>
         where TController : BasePartController<TView, TController>
     {
         public TView View;
         public TController Controller;
 
-        public State(TView view, TController controller)
+        public State(TView view, TController controller) : base(view, controller)
         {
             View = view;
             Controller = controller;
@@ -29,25 +37,29 @@ public class ViewControllerHell
         }
     }
 
-    public class StatePart<TView, TController>
-        where TView : BasePartView<TView, TController>
-        where TController : BasePartController<TView, TController>
+    public class BaseStatePart
     {
-        public State<TView, TController> State;
+    }
+
+    public class StatePart<TView, TController> : BaseStatePart
+        where TView : class
+        where TController : class
+    {
+        public State State;
+        public TView View => State.View as TView;
+        public TController Controller => State.Controller as TController;
     }
 
     public class BasePartView<TView, TController> : StatePart<TView, TController>
-        where TView : BasePartView<TView, TController>
-        where TController : BasePartController<TView, TController>
+        where TView : class
+        where TController : class
     {
-        public TController Controller => State.Controller;
     }
 
     public class BasePartController<TView, TController> : StatePart<TView, TController>
-        where TView : BasePartView<TView, TController>
-        where TController : BasePartController<TView, TController>
+        where TView : class
+        where TController : class
     {
-        public TView View => State.View;
     }
 
     public class IdleView : BasePartView<IdleView, IdleController>
@@ -57,6 +69,57 @@ public class ViewControllerHell
     public class IdleController : BasePartController<IdleView, IdleController>
     {
     }
+
+    //----------------------------------------------------------------------------------
+
+    // public class State<TView, TController>
+    //     where TView : BasePartView<TView, TController>
+    //     where TController : BasePartController<TView, TController>
+    // {
+    //     public TView View;
+    //     public TController Controller;
+    //
+    //     public State(TView view, TController controller)
+    //     {
+    //         View = view;
+    //         Controller = controller;
+    //
+    //         View.State = this;
+    //         Controller.State = this;
+    //     }
+    // }
+    //
+    // public class StatePart<TView, TController>
+    //     where TView : BasePartView<TView, TController>
+    //     where TController : BasePartController<TView, TController>
+    // {
+    //     public State<TView, TController> State;
+    // }
+    //
+    // public class BasePartView<TView, TController> : StatePart<TView, TController>
+    //     where TView : BasePartView<TView, TController>
+    //     where TController : BasePartController<TView, TController>
+    // {
+    //     public TController Controller => State.Controller;
+    // }
+    //
+    // public class BasePartController<TView, TController> : StatePart<TView, TController>
+    //     where TView : BasePartView<TView, TController>
+    //     where TController : BasePartController<TView, TController>
+    // {
+    //     public TView View => State.View;
+    // }
+    //
+    // public class IdleView : BasePartView<IdleView, IdleController>
+    // {
+    // }
+    //
+    // public class IdleController : BasePartController<IdleView, IdleController>
+    // {
+    // }
+
+
+    //----------------------------------------------------------------------------------
 
     // public class State<TView, TController>
     //     where TView : BasePartView<TView, TController>
