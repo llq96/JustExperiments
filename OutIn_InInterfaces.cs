@@ -31,16 +31,16 @@ public class OutIn_InInterfaces
         // listObj[0] = new SomeClass<object>(); // System.ArrayTypeMismatchException
 #endif
     }
-}
 
-public interface ISomeInterface<
+    public interface ISomeInterface<
 #if EnableIN
-    in
+        in
 #endif
 #if EnableOUT
     out
 #endif
-    TType
->;
+        TType
+    >;
 
-public class SomeClass<T> : ISomeInterface<T>;
+    public class SomeClass<T> : ISomeInterface<T>;
+}
