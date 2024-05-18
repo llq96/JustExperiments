@@ -33,6 +33,7 @@ public class InterfacesILCodeTests
 
         #region Virtual
 
+        //Static:
         public static virtual event Action StaticVirtualEvent; //Static Virtual Event
         public static virtual int StaticVirtualProperty => 0; //Static Virtual Property
         public static virtual int StaticVirtualMethod() => 0; //Static Virtual Method
@@ -53,6 +54,7 @@ public class InterfacesILCodeTests
 
         #region Abstract
 
+        //Static:
         public static abstract event Action StaticAbstractEvent; //Static Abstract Event
         public static abstract int StaticAbstractProperty { get; } //Static Abstract Property
         public static abstract int StaticAbstractMethod(); //Static Abstract Method
