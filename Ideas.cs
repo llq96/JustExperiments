@@ -22,8 +22,6 @@ public class Ideas
     
     // private static void Main()
     // {
-    //     var a = new SomeClass1();
-    //     var b = new SomeClass2();
     //     SomeClass1.Value = 1;
     //     SomeClass2.Value = 2;
     //     Console.WriteLine(SomeClass1.Value);
