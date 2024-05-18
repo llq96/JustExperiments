@@ -1,12 +1,10 @@
-﻿using ExamplesForInterview.TgSolution;
-
-namespace ExamplesForInterview;
+﻿namespace ExamplesForInterview;
 
 internal class Program
 {
     private static void Main()
     {
         // BenchmarkRunner.Run<ForeachBenchmarks>();
-        new TG_TaskAboutBytes().Run2();
+        new TasksExecuteSynchronously().Run();
     }
 }
