@@ -21,8 +21,8 @@ public class ViewControllerHell
     }
 
     public class State<TView, TController> : State
-        where TView : BasePartView<TView, TController>
-        where TController : BasePartController<TView, TController>
+        where TView : BasePartView
+        where TController : BasePartController
     {
         public TView View;
         public TController Controller;
@@ -41,32 +41,26 @@ public class ViewControllerHell
     {
     }
 
-    public class StatePart<TView, TController> : BaseStatePart
-        where TView : class
-        where TController : class
+    public class StatePart : BaseStatePart
     {
         public State State;
-        public TView View => State.View as TView;
-        public TController Controller => State.Controller as TController;
     }
 
-    public class BasePartView<TView, TController> : StatePart<TView, TController>
-        where TView : class
-        where TController : class
+    public class BasePartView : StatePart
     {
     }
 
-    public class BasePartController<TView, TController> : StatePart<TView, TController>
-        where TView : class
-        where TController : class
+    public class BasePartController : StatePart
+
     {
     }
 
-    public class IdleView : BasePartView<IdleView, IdleController>
+    public class IdleView : BasePartView
     {
+        private IdleController IdleController => State.Controller as IdleController;
     }
 
-    public class IdleController : BasePartController<IdleView, IdleController>
+    public class IdleController : BasePartController
     {
     }
 
