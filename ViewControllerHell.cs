@@ -8,10 +8,10 @@ public class ViewControllerHell
         var controller = new IdleController();
         var state = new State<IdleView, IdleController>(view, controller);
 
-        var a = view.View;
-        var b = controller.Controller;
-        Console.WriteLine(state.View.Controller);
-        Console.WriteLine(state.Controller.View);
+        var a = view.IdleController;
+        var b = controller.IdleView;
+        // Console.WriteLine(state.View.Controller);
+        // Console.WriteLine(state.Controller.View);
     }
 
     public abstract class State(BaseStatePart view, BaseStatePart controller)
@@ -57,11 +57,12 @@ public class ViewControllerHell
 
     public class IdleView : BasePartView
     {
-        private IdleController IdleController => State.Controller as IdleController;
+        public IdleController IdleController => State.Controller as IdleController;
     }
 
     public class IdleController : BasePartController
     {
+        public IdleView IdleView => State.View as IdleView;
     }
 
     //----------------------------------------------------------------------------------
