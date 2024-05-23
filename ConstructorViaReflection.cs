@@ -2,6 +2,10 @@
 
 namespace ExamplesForInterview;
 
+/// <summary>
+/// Доказательство того, что приватный конструктор можно вызвать через рефлексию,
+/// что во многом обесценивает паттерн Singleton
+/// </summary>
 public class ConstructorViaReflection
 {
     public void Run()
