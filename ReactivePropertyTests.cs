@@ -2,9 +2,13 @@
 
 namespace ExamplesForInterview;
 
+/// <summary>
+/// Выведет 2 3
+/// Это отличается от ожидаемого поведения паттерна Observer
+/// </summary>
 public class ReactivePropertyTests
 {
-    private ReactiveInt _reactiveInt = new();
+    private readonly ReactiveInt _reactiveInt = new();
 
     public void Run()
     {

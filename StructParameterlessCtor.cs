@@ -7,7 +7,7 @@ public class StructParameterlessCtor
     public void Run()
     {
         Console.WriteLine(_structField); // 0 (!), конструктор без параметров не был вызван
-        MyStruct structVariable = new(); //Явный вызов конструктора
+        MyStruct structVariable = new(); // Явный вызов конструктора
         Console.WriteLine(structVariable); // 20
     }
 
@@ -15,16 +15,11 @@ public class StructParameterlessCtor
     {
         private int _value;
 
-        // public MyStruct()
-        // {
-        //     _value = 20;
-        // }
-
-        public MyStruct(int a)
+        public MyStruct()
         {
-            // _value = 20;
+            _value = 20;
         }
-        
+
         public override string ToString()
         {
             return $"{_value}";

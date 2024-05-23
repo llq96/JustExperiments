@@ -2,10 +2,12 @@
 
 namespace ExamplesForInterview;
 
-// | Method | Mean      | Error    | StdDev   | Ratio | RatioSD | Allocated | Alloc Ratio |
-// |------- |----------:|---------:|---------:|------:|--------:|----------:|------------:|
-// | Test1  |  24.91 ns | 0.152 ns | 0.134 ns |  1.00 |    0.00 |         - |          NA |
-// | Test2  | 438.62 ns | 1.135 ns | 1.006 ns | 17.61 |    0.11 |         - |          NA |
+// Ключевое слово async делает метод асинхронным, это видно и по IL коду и по производительности
+
+// | Method | Mean      | Error    | StdDev   | Ratio | RatioSD |
+// |------- |----------:|---------:|---------:|------:|--------:|
+// | Test1  |  24.91 ns | 0.152 ns | 0.134 ns |  1.00 |    0.00 |
+// | Test2  | 438.62 ns | 1.135 ns | 1.006 ns | 17.61 |    0.11 |
 
 [MemoryDiagnoser]
 public class PseudoAsyncBenchmark

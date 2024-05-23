@@ -42,8 +42,13 @@ public class RefOutIn_InMethods
 
     private void Vector3_MethodWithIn(in MyVector3 value)
     {
+        // value._x = 1; //"Cannot modify struct member when accessed struct is not classified as a variable"
+        // value.X = 1;  //"Cannot modify struct member when accessed struct is not classified as a variable"
+        value.SetX(1); //Можно, но есть предупреждение "Possibly impure struct method called on readonly variable: struct value always copied before invocation"
+        //Можно даже если get модифицирует поля, нет ни ошибки ни предупреждения, выполняется, но вводит в заблуждение
+        int a = value.Y;
         Console.WriteLine(value._x);
-        Console.WriteLine(value.Y);
+        Console.WriteLine();
         Console.WriteLine(value);
     }
 }
@@ -72,9 +77,9 @@ public struct MyVector3
         set => _z = value;
     }
 
-    public void SetX()
+    public void SetX(int x)
     {
-        X = 123;
+        X = x;
     }
 
     public MyVector3(int x, int y, int z)

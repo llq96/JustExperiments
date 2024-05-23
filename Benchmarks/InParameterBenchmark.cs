@@ -2,29 +2,32 @@
 
 namespace ExamplesForInterview;
 
+// "in" может привести к падению производительности
+// Но зависимость от размера структуры неоднозначна
+
 // Size: Just x,y,z
-// | Method                    | Mean     | Error    | StdDev   | Ratio | RatioSD | Allocated | Alloc Ratio |
-// |-------------------------- |---------:|---------:|---------:|------:|--------:|----------:|------------:|
-// | Test_UseProperties        | 25.58 ns | 0.284 ns | 0.266 ns |  1.00 |    0.00 |         - |          NA |
-// | Test_UseProperties_WithIn | 84.94 ns | 0.621 ns | 0.485 ns |  3.32 |    0.05 |         - |          NA |
-// | Test_UseFields            | 25.54 ns | 0.434 ns | 0.406 ns |  1.00 |    0.02 |         - |          NA |
-// | Test_UseFields_WithIn     | 25.26 ns | 0.210 ns | 0.197 ns |  0.99 |    0.01 |         - |          NA |
+// | Method                    | Mean     | Error    | StdDev   | Ratio |
+// |-------------------------- |---------:|---------:|---------:|------:|
+// | Test_UseProperties        | 25.58 ns | 0.284 ns | 0.266 ns |  1.00 |
+// | Test_UseProperties_WithIn | 84.94 ns | 0.621 ns | 0.485 ns |  3.32 |
+// | Test_UseFields            | 25.54 ns | 0.434 ns | 0.406 ns |  1.00 |
+// | Test_UseFields_WithIn     | 25.26 ns | 0.210 ns | 0.197 ns |  0.99 |
 
 // Size: x,y,z + 3 decimals
-// | Method                    | Mean      | Error    | StdDev   | Ratio | RatioSD | Allocated | Alloc Ratio |
-// |-------------------------- |----------:|---------:|---------:|------:|--------:|----------:|------------:|
-// | Test_UseProperties        |  61.37 ns | 1.020 ns | 0.954 ns |  1.00 |    0.00 |         - |          NA |
-// | Test_UseProperties_WithIn | 118.18 ns | 0.888 ns | 0.787 ns |  1.92 |    0.03 |         - |          NA |
-// | Test_UseFields            |  57.85 ns | 0.855 ns | 0.800 ns |  0.94 |    0.02 |         - |          NA |
-// | Test_UseFields_WithIn     |  58.39 ns | 1.153 ns | 1.328 ns |  0.96 |    0.03 |         - |          NA |
+// | Method                    | Mean      | Error    | StdDev   | Ratio |
+// |-------------------------- |----------:|---------:|---------:|------:|
+// | Test_UseProperties        |  61.37 ns | 1.020 ns | 0.954 ns |  1.00 |
+// | Test_UseProperties_WithIn | 118.18 ns | 0.888 ns | 0.787 ns |  1.92 |
+// | Test_UseFields            |  57.85 ns | 0.855 ns | 0.800 ns |  0.94 |
+// | Test_UseFields_WithIn     |  58.39 ns | 1.153 ns | 1.328 ns |  0.96 |
 
 // Size: x,y,z + 30 decimals
-// | Method                    | Mean     | Error   | StdDev  | Ratio | Allocated | Alloc Ratio |
-// |-------------------------- |---------:|--------:|--------:|------:|----------:|------------:|
-// | Test_UseProperties        | 559.8 ns | 1.41 ns | 1.25 ns |  1.00 |         - |          NA |
-// | Test_UseProperties_WithIn | 591.7 ns | 0.92 ns | 0.81 ns |  1.06 |         - |          NA |
-// | Test_UseFields            | 590.7 ns | 0.67 ns | 0.59 ns |  1.06 |         - |          NA |
-// | Test_UseFields_WithIn     | 552.8 ns | 0.40 ns | 0.36 ns |  0.99 |         - |          NA |
+// | Method                    | Mean     | Error   | StdDev  | Ratio |
+// |-------------------------- |---------:|--------:|--------:|------:|
+// | Test_UseProperties        | 559.8 ns | 1.41 ns | 1.25 ns |  1.00 |
+// | Test_UseProperties_WithIn | 591.7 ns | 0.92 ns | 0.81 ns |  1.06 |
+// | Test_UseFields            | 590.7 ns | 0.67 ns | 0.59 ns |  1.06 |
+// | Test_UseFields_WithIn     | 552.8 ns | 0.40 ns | 0.36 ns |  0.99 |
 
 [MemoryDiagnoser]
 public class InParameterBenchmark

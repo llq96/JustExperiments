@@ -1,7 +1,7 @@
 ﻿namespace ExamplesForInterview;
 
 /// <summary>
-/// Округление до ближайшего, в случае 0.5 - округление до чётного
+/// Округление до ближайшего, в случае .5 - округление до чётного
 /// </summary>
 public class MathRound
 {
