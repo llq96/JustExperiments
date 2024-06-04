@@ -1,10 +1,12 @@
-﻿namespace ExamplesForInterview;
+﻿using ExamplesForInterview.Examples;
+
+namespace ExamplesForInterview;
 
 internal class Program
 {
     private static void Main()
     {
         // BenchmarkRunner.Run<ForeachBenchmarks>();
-        new ExceptionTests().Run();
+        new VirtualInvokes().Run();
     }
 }
