@@ -19,7 +19,7 @@
       <PackageReference Include="ReactiveUI" Version="19.6.1" />
       <PackageReference Include="System.Reactive" Version="6.0.0" />
       <Reference Include="DynamicMethodHelpers">
-        <HintPath>..\ILGeneratorHelper\bin\Debug\net8.0\ILGeneratorHelper.dll</HintPath>
+        <HintPath>..\ILDelegateHelpers\bin\Debug\net8.0\ILDelegateHelpers.dll</HintPath>
       </Reference>
     </ItemGroup>
 
