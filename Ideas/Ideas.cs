@@ -8,6 +8,15 @@ public class Ideas
 // Unsafe.Unbox<int>(o) = 456;
 // Console.WriteLine(o); //456
 
+//--------------------------------------  Интересная проверка типов, можно задачу из этого придумать
+// int? nullableInt = null;
+// Console.WriteLine(nullableInt is int); //False
+// Console.WriteLine(nullableInt is Nullable<int>); //False
+//
+// nullableInt = 0;
+// Console.WriteLine(nullableInt is int); //True
+// Console.WriteLine(nullableInt is Nullable<int>); //True
+
 //--------------------------------------   В foreach классы под делегат создаются для каждого элемента
 
 // List<int> list = new() { 1, 2, 3 };
