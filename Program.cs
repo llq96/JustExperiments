@@ -5,6 +5,6 @@ internal class Program
     private static void Main()
     {
         // BenchmarkRunner.Run<ForeachBenchmarks>();
-        new DynamicMethodsHelperExperiments().Run();
+        new StaticAndInstanceConstructors().Run();
     }
 }
