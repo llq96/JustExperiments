@@ -8,6 +8,12 @@ public class Ideas
 // Unsafe.Unbox<int>(o) = 456;
 // Console.WriteLine(o); //456
 
+//--------------------------------------  Для задачи: await нельзя использовать в unsafe контексте, но async unsafe возможен
+// public static async unsafe Task<int> Test()
+// {
+//     return 1;
+// }
+
 //--------------------------------------  Интересная проверка типов, можно задачу из этого придумать
 // int? nullableInt = null;
 // Console.WriteLine(nullableInt is int); //False
