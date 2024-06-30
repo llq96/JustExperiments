@@ -2,9 +2,9 @@
 
 internal class Program
 {
-    private static void Main()
-    {
-        // BenchmarkRunner.Run<ForeachBenchmarks>();
-        new StaticAndInstanceConstructors().Run();
-    }
+    // private static void Main()
+    // {
+    //     // BenchmarkRunner.Run<ForeachBenchmarks>();
+    //     new StaticAndInstanceConstructors().Run();
+    // }
 }
