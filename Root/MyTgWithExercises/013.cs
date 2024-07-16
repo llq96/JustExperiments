@@ -1,8 +1,8 @@
-﻿// public class E_013
+﻿// public class Persons_013
 // {
 //     static void Main()
 //     {
-//         var person = new Person("Alice");
+//         var person = new Person("Mike");
 //         ModifyPerson(person);
 //         Console.WriteLine(person.Name);
 //     }
@@ -11,14 +11,14 @@
 //     {
 //         p = new Person("Bob");
 //     }
-// }
 //
-// class Person
-// {
-//     public string Name { get; set; }
-//
-//     public Person(string name)
+//     public class Person
 //     {
-//         Name = name;
+//         public string Name { get; set; }
+//
+//         public Person(string name)
+//         {
+//             Name = name;
+//         }
 //     }
 // }
