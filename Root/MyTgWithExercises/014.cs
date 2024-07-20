@@ -1,28 +1,25 @@
-﻿// public class E_014
+﻿// public class MethodSealed_014
 // {
-//     static void Main()
+//     private static void Main()
 //     {
-//         //TODO
+//         var c = new C();
+//         c.Write();
 //     }
 //
-//     public class A
+//     public abstract class A
 //     {
-//         public virtual void Test()
-//         {
-//         }
+//         public abstract void Write();
 //     }
 //
 //     public class B : A
 //     {
-//         public sealed override void Test()
-//         {
-//         }
+//         public sealed override void Write()
+//             => Console.WriteLine("B");
 //     }
 //
 //     public class C : B
 //     {
 //         public override void Test()
-//         {
-//         }
+//             => Console.WriteLine("C");
 //     }
 // }
