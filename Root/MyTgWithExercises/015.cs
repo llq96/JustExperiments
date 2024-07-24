@@ -1,12 +1,12 @@
-﻿// public class E_015
+﻿// public class Dynamic_015
 // {
-//     static void Main()
+//     private static void Main()
 //     {
-//         object result = Test(123);
+//         object result = PlusOne(123);
 //         Console.WriteLine(result);
 //     }
 //
-//     public static dynamic Test(dynamic d)
+//     private static dynamic PlusOne(dynamic d)
 //     {
 //         return d + 1;
 //     }
